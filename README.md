@@ -18,3 +18,6 @@ Open index.html in a web browser.
 
 ## Version Control
 This project is managed using Git and GitHub.
+
+## Welcome Banner Feature
+Added a welcome banner to the student portal.
