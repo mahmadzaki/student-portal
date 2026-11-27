@@ -431,20 +431,50 @@ function setView(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+f
 function renderWelcome() {
   const h = new Date().getHours();
-  const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-  const avg = Math.round(DATA.attendance.reduce((s, a) => s + a.value, 0) / DATA.attendance.length);
+
+  const greet = h < 12
+    ? 'Good morning'
+    : h < 17
+      ? 'Good afternoon'
+      : 'Good evening';
+
+  const avg = DATA.attendance.length
+    ? Math.round(
+        DATA.attendance.reduce((s, a) => s + a.value, 0) /
+        DATA.attendance.length
+      )
+    : 0;
+
   const pending = DATA.challans.filter(c => !c.paid).length;
+
   $('#welcome').innerHTML = `
-    <div>
+    <div class="welcome-content">
+      <span class="welcome-label">LAHORE GARRISON UNIVERSITY</span>
       <h2>${greet}, ${DATA.profile.name} 👋</h2>
       <p>${DATA.profile.program} · ${DATA.student.semester} · Section ${DATA.student.section}</p>
+      <p class="welcome-message">
+        Welcome to your student dashboard. Stay updated with your academic progress.
+      </p>
     </div>
+
     <div class="w-chips">
-      <div class="w-chip"><b>${avg}%</b><span>Avg. attendance</span></div>
-      <div class="w-chip"><b>${DATA.courses.length}</b><span>Courses</span></div>
-      <div class="w-chip"><b>${pending}</b><span>Pending challan${pending === 1 ? '' : 's'}</span></div>
+      <div class="w-chip">
+        <b>${avg}%</b>
+        <span>Avg. attendance</span>
+      </div>
+
+      <div class="w-chip">
+        <b>${DATA.courses.length}</b>
+        <span>Courses</span>
+      </div>
+
+      <div class="w-chip">
+        <b>${pending}</b>
+        <span>Pending challans</span>
+      </div>
     </div>`;
 }
 
