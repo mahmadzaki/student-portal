@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Portal | Lahore Garrison University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <nav id="nav" aria-label="Main navigation"></nav>
+  </aside>
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="Toggle menu"></button>
+
+    <div class="brand">
+      <div class="crest">LGU</div>
+      <span>LAHORE GARRISON UNIVERSITY</span>
+    </div>
+
+    <div class="search">
+      <span id="searchIcon"></span>
+      <input type="text" id="search" placeholder="Search courses, challans…" autocomplete="off">
+    </div>
+
+    <div class="top-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+
+      <div class="dropdown">
+        <button class="icon-btn bell" id="bellBtn" aria-label="Notifications">
+          <span id="bellIcon"></span>
+          <b class="badge" id="badge">9+</b>
+        </button>
+        <div class="menu notif" id="notifMenu"></div>
+      </div>
+
+      <div class="dropdown">
+        <button class="profile-pill" id="profileBtn">
+          <span class="avatar">🎓</span>
+          <span id="profileLabel">Fa-2025/BS DFCS/009</span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="menu" id="profileMenu"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main" id="main">
+    <h1 class="page-title" id="pageTitle">DASHBOARD</h1>
+
+    <!-- Welcome banner -->
+    <section class="welcome" id="welcome" data-views="dashboard"></section>
+
+    <!-- Stat cards -->
+    <section class="stats" id="stats" data-views="dashboard"></section>
+
+    <!-- Row 1 -->
+    <section class="grid two">
+      <article class="panel" data-views="dashboard attendance">
+        <div class="panel-head navy"><h2>Attendance</h2><a href="#attendance" class="go">→</a></div>
+        <div class="panel-body">
+          <div class="legend"><i></i> Attendance in %</div>
+          <div id="attChart" class="chart"></div>
+          <p class="hint" id="attHint"></p>
+        </div>
+      </article>
+
+      <article class="panel" data-views="dashboard fee">
+        <div class="panel-head periwinkle">
+          <h2>Student Challans</h2>
+          <select id="challanFilter" class="mini-select" aria-label="Filter challans">
+            <option value="all">All</option>
+            <option value="unpaid">Unpaid</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+        <div class="panel-body scroll">
+          <table id="challanTable">
+            <thead><tr>
+              <th>Semester Session</th><th>Challan Type</th><th>Issue Date</th><th>Due</th><th>Amount</th><th>Status</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- Row 2 -->
+    <section class="grid two">
+      <article class="panel" data-views="dashboard calendar">
+        <div class="panel-head steel"><h2>Academic Calender</h2><a href="#calendar" class="go">→</a></div>
+        <div class="panel-body scroll">
+          <table id="calTable">
+            <thead><tr><th>Activity</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel" data-views="dashboard courses attendance">
+        <div class="panel-head maroon"><h2>Current Course Enrolled</h2><a href="#courses" class="go">→</a></div>
+        <div class="panel-body scroll">
+          <table id="courseTable">
+            <thead><tr><th>Course Name</th><th>Teacher Name</th><th>Attendance</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- Row 3 -->
+    <section class="grid three">
+      <article class="panel" data-views="dashboard results">
+        <div class="panel-head teal"><h2>Test Performance</h2><a href="#results" class="go">→</a></div>
+        <div class="panel-body">
+          <div class="perf">
+            <div class="perf-stats" id="perfStats"></div>
+            <div id="testChart" class="chart small"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel" data-views="dashboard courses">
+        <div class="panel-head green"><h2>Class Schedule</h2><span class="date-chip" id="todayChip"></span></div>
+        <div class="panel-body list" id="schedule"></div>
+      </article>
+
+      <article class="panel" data-views="dashboard messages">
+        <div class="panel-head orange"><h2>Notice Board</h2><span class="date-chip" id="todayChip2"></span></div>
+        <div class="panel-body list" id="notices"></div>
+      </article>
+    </section>
+
+    <!-- Profile + Settings pages -->
+    <section class="grid two">
+      <article class="panel" data-views="profile">
+        <div class="panel-head navy"><h2>Student Information</h2></div>
+        <div class="panel-body" id="profileCard"></div>
+      </article>
+
+      <article class="panel" data-views="settings">
+        <div class="panel-head steel"><h2>Preferences</h2></div>
+        <div class="panel-body" id="settingsCard"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">© Copyright 2026 Develop By ERP Team.</footer>
+
+  <!-- Payment modal -->
+  <div class="modal" id="payModal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="payTitle">
+      <h3 id="payTitle">Pay Challan</h3>
+      <div class="pay-summary" id="paySummary"></div>
+      <label class="field">Payment method
+        <select id="payMethod">
+          <option>JazzCash</option>
+          <option>Easypaisa</option>
+          <option>Bank Transfer (HBL / UBL)</option>
+          <option>Debit / Credit Card</option>
+        </select>
+      </label>
+      <div class="modal-actions">
+        <button class="btn ghost" id="payCancel">Cancel</button>
+        <button class="btn" id="payConfirm">Confirm Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
